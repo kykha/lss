@@ -17,7 +17,7 @@ open_weather_key = os.getenv('OPEN_WEATHER_KEY')
 open_weather_baseurl = os.getenv('OPEN_WEATHER_BASEURL')
 aws_client = os.getenv('AWS_CLI_KEY')
 aws_secret = os.getenv('AWS_CLI_SECRET')
-places_client= os.getenv('PLACES_API_KEY')
+places_client = os.getenv('PLACES_API_KEY')
 google_places = GooglePlaces(places_client)
 timestamp = time.strftime("%Y%m%d-%H%M%S")
 office_file = os.getenv('OFFICE_FILE')
@@ -26,8 +26,8 @@ s3_bucket_name = "lunch-suggestion-system"
 # Function which suggest lunch place near each office locations
 def suggest_lunch_place(office_location):
      query_result = google_places.nearby_search(
-     location= office_location,
-     radius=3000,
+     location = office_location,
+     radius = 3000,
      types=[types.TYPE_RESTAURANT])
 
     #return query_result
@@ -42,7 +42,7 @@ def suggest_lunch_place(office_location):
      url = rest_choice.url
 
     # Create dictionary which will contain data about the Office and Restaurant
-     location_details= {  "Office location":  office_location, 
+     location_details= { "Office location": office_location, 
                                      "Restaurant suggestion": rest_name,
                                       "Restaurant address": rest_address,
                                       "Restaurant rating": rest_rating,
@@ -66,13 +66,13 @@ def find_weather_data(lat, lng):
     
     weather_desc = weather_data["weather"][0]['description']
     temp = weather_data["main"]["temp"]
-    temp_feels= weather_data["main"]["feels_like"]
+    temp_feels = weather_data["main"]["feels_like"]
     pressure = weather_data["main"]["pressure"]
     humidity = weather_data["main"]["humidity"]
     wind_speed = weather_data["wind"]["speed"]
     weather_time = datetime.utcfromtimestamp(weather_data['dt'] + weather_data['timezone'])
 
-    weather_details= {"Weather description": weather_desc,
+    weather_details = {"Weather description": weather_desc,
                                       "Temperature feels like": temp_feels,
                                       "Pressure": pressure,
                                       "Humidity": humidity,
@@ -100,7 +100,7 @@ def upload_to_aws (file_name):
      
 # Execute the main code     
 if __name__ == '__main__':
-  file_name="lss_" + timestamp + ".csv"
+  file_name = "lss_" + timestamp + ".csv"
   with open("office.txt", encoding="utf8") as f:
      for line in f:
       office_location = f.readline()
@@ -109,10 +109,10 @@ if __name__ == '__main__':
       lss = pd.DataFrame([lunch_suggestion_place])
       
       # Create or update existing .csv file
-      if os.path.isfile(file_name) : 
+      if os.path.isfile(file_name): 
         lss.to_csv(file_name, mode='a', index=False, header=False)  
-      else :
-        lss.to_csv(file_name, index = False)  
+      else:
+        lss.to_csv(file_name, index=False)  
         
 # Upload .csv file to Amazon S3 (AWS)       
 upload =  upload_to_aws (file_name)
