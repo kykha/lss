@@ -46,7 +46,7 @@ def suggest_lunch_place(office_location):
                                      "Restaurant suggestion": rest_name,
                                       "Restaurant address": rest_address,
                                       "Restaurant rating": rest_rating,
-                                      "Restaurant website":  website,
+                                      "Restaurant website": website,
                                       "Restaurant phone": global_phone_num,
                                       "Url": url}
      
@@ -73,7 +73,7 @@ def find_weather_data(lat, lng):
     weather_time = datetime.utcfromtimestamp(weather_data['dt'] + weather_data['timezone'])
 
     weather_details= {"Weather description": weather_desc,
-                                      "Temperature feels like" :  temp_feels,
+                                      "Temperature feels like": temp_feels,
                                       "Pressure": pressure,
                                       "Humidity": humidity,
                                       "Wind Speed": wind_speed,
@@ -107,7 +107,6 @@ if __name__ == '__main__':
       office_location = office_location.rstrip()
       lunch_suggestion_place = suggest_lunch_place(office_location)
       lss = pd.DataFrame([lunch_suggestion_place])
-      print(lss)
       
       # Create or update existing .csv file
       if os.path.isfile(file_name) : 
@@ -115,6 +114,5 @@ if __name__ == '__main__':
       else :
         lss.to_csv(file_name, index = False)  
         
-# Upload to AWS S3        
+# Upload .csv file to Amazon S3 (AWS)       
 upload =  upload_to_aws (file_name)
-print (upload)
