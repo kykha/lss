@@ -19,7 +19,7 @@ POSSIBLE IMPROVEMENTS
 
 - adding catching of the exceptions
 - adding more modularity
-- code refinement (not keeping the file open during the code execution)
+- code refinement (e.g.: not keeping the file open during the code execution)
 - use local credentials as a resource to communicate with AWS tier to avoid manual AWS Configuration before execution
 
 
