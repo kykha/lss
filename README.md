@@ -10,5 +10,14 @@ We want to have a list with every Repsly location in the world, and for each of 
 
 We have bigger plans for this service; to make it part of the initiative to bring all Repsly locations closer. For that purpose, please prepare it for the internal technical team to take over. On top of working code please provide a detailed description of the solution suitable for handover to the other team.
 
+NOTE / DISCLAIMER
+
+To accomplish full functionality and upload a file to Amazon S3 bucket manually AWS Configuration is needed, since in this case it is connected to a personal AWS account and therefore upload to AWS will fail because of nonexisting credentials and permissions.
+This code offers basic functionality without catching any exceptions - since that kind of activity requires more time and in-depth analysis of the systems used in this DEMO.
+
+How to set local AWS configuration (and possibly to change the upload directory to your own S3 bucket): https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
+Also more advanced solution would be to catch local credentials as a resource but this time that functionality was out of the scope.
+
+
 
 
